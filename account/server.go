@@ -20,6 +20,7 @@ func NewGRPCServer(service Service, port int) error {
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		return err
+
 	}
 
 	server := grpc.NewServer()

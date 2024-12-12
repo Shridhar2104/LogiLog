@@ -25,6 +25,7 @@ type Account struct {
 
 type accountService struct {
 	repo Repository
+	
 }
 
 func NewAccountService(repo Repository) Service {
