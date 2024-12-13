@@ -23,6 +23,10 @@ const (
 	ShopifyService_StoreToken_FullMethodName                 = "/pb.ShopifyService/StoreToken"
 	ShopifyService_GetOrdersForShopAndAccount_FullMethodName = "/pb.ShopifyService/GetOrdersForShopAndAccount"
 	ShopifyService_UpdateOrder_FullMethodName                = "/pb.ShopifyService/UpdateOrder"
+	ShopifyService_CalculateShippingRates_FullMethodName     = "/pb.ShopifyService/CalculateShippingRates"
+	ShopifyService_GetShipmentDetails_FullMethodName         = "/pb.ShopifyService/GetShipmentDetails"
+	ShopifyService_CreateShipment_FullMethodName             = "/pb.ShopifyService/CreateShipment"
+	ShopifyService_ShipmentGraphql_FullMethodName            = "/pb.ShopifyService/ShipmentGraphql"
 )
 
 // ShopifyServiceClient is the client API for ShopifyService service.
@@ -33,6 +37,10 @@ type ShopifyServiceClient interface {
 	StoreToken(ctx context.Context, in *StoreTokenRequest, opts ...grpc.CallOption) (*StoreTokenResponse, error)
 	GetOrdersForShopAndAccount(ctx context.Context, in *GetOrdersForShopAndAccountRequest, opts ...grpc.CallOption) (*GetOrdersForShopAndAccountResponse, error)
 	UpdateOrder(ctx context.Context, in *UpdateOrderRequest, opts ...grpc.CallOption) (*UpdateOrderResponse, error)
+	CalculateShippingRates(ctx context.Context, in *CalculateShippingRatesRequest, opts ...grpc.CallOption) (*CalculateShippingRatesResponse, error)
+	GetShipmentDetails(ctx context.Context, in *GetShipmentDetailsRequest, opts ...grpc.CallOption) (*GetShipmentDetailsResponse, error)
+	CreateShipment(ctx context.Context, in *CreateShipmentRequest, opts ...grpc.CallOption) (*CreateShipmentResponse, error)
+	ShipmentGraphql(ctx context.Context, in *ShipmentGraphqlRequest, opts ...grpc.CallOption) (*ShipmentGraphqlResponse, error)
 }
 
 type shopifyServiceClient struct {
@@ -83,6 +91,46 @@ func (c *shopifyServiceClient) UpdateOrder(ctx context.Context, in *UpdateOrderR
 	return out, nil
 }
 
+func (c *shopifyServiceClient) CalculateShippingRates(ctx context.Context, in *CalculateShippingRatesRequest, opts ...grpc.CallOption) (*CalculateShippingRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CalculateShippingRatesResponse)
+	err := c.cc.Invoke(ctx, ShopifyService_CalculateShippingRates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *shopifyServiceClient) GetShipmentDetails(ctx context.Context, in *GetShipmentDetailsRequest, opts ...grpc.CallOption) (*GetShipmentDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetShipmentDetailsResponse)
+	err := c.cc.Invoke(ctx, ShopifyService_GetShipmentDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *shopifyServiceClient) CreateShipment(ctx context.Context, in *CreateShipmentRequest, opts ...grpc.CallOption) (*CreateShipmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateShipmentResponse)
+	err := c.cc.Invoke(ctx, ShopifyService_CreateShipment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *shopifyServiceClient) ShipmentGraphql(ctx context.Context, in *ShipmentGraphqlRequest, opts ...grpc.CallOption) (*ShipmentGraphqlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ShipmentGraphqlResponse)
+	err := c.cc.Invoke(ctx, ShopifyService_ShipmentGraphql_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ShopifyServiceServer is the server API for ShopifyService service.
 // All implementations must embed UnimplementedShopifyServiceServer
 // for forward compatibility.
@@ -91,6 +139,10 @@ type ShopifyServiceServer interface {
 	StoreToken(context.Context, *StoreTokenRequest) (*StoreTokenResponse, error)
 	GetOrdersForShopAndAccount(context.Context, *GetOrdersForShopAndAccountRequest) (*GetOrdersForShopAndAccountResponse, error)
 	UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error)
+	CalculateShippingRates(context.Context, *CalculateShippingRatesRequest) (*CalculateShippingRatesResponse, error)
+	GetShipmentDetails(context.Context, *GetShipmentDetailsRequest) (*GetShipmentDetailsResponse, error)
+	CreateShipment(context.Context, *CreateShipmentRequest) (*CreateShipmentResponse, error)
+	ShipmentGraphql(context.Context, *ShipmentGraphqlRequest) (*ShipmentGraphqlResponse, error)
 	mustEmbedUnimplementedShopifyServiceServer()
 }
 
@@ -112,6 +164,18 @@ func (UnimplementedShopifyServiceServer) GetOrdersForShopAndAccount(context.Cont
 }
 func (UnimplementedShopifyServiceServer) UpdateOrder(context.Context, *UpdateOrderRequest) (*UpdateOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrder not implemented")
+}
+func (UnimplementedShopifyServiceServer) CalculateShippingRates(context.Context, *CalculateShippingRatesRequest) (*CalculateShippingRatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateShippingRates not implemented")
+}
+func (UnimplementedShopifyServiceServer) GetShipmentDetails(context.Context, *GetShipmentDetailsRequest) (*GetShipmentDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetShipmentDetails not implemented")
+}
+func (UnimplementedShopifyServiceServer) CreateShipment(context.Context, *CreateShipmentRequest) (*CreateShipmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateShipment not implemented")
+}
+func (UnimplementedShopifyServiceServer) ShipmentGraphql(context.Context, *ShipmentGraphqlRequest) (*ShipmentGraphqlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShipmentGraphql not implemented")
 }
 func (UnimplementedShopifyServiceServer) mustEmbedUnimplementedShopifyServiceServer() {}
 func (UnimplementedShopifyServiceServer) testEmbeddedByValue()                        {}
@@ -206,6 +270,78 @@ func _ShopifyService_UpdateOrder_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ShopifyService_CalculateShippingRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalculateShippingRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopifyServiceServer).CalculateShippingRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShopifyService_CalculateShippingRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopifyServiceServer).CalculateShippingRates(ctx, req.(*CalculateShippingRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShopifyService_GetShipmentDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetShipmentDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopifyServiceServer).GetShipmentDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShopifyService_GetShipmentDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopifyServiceServer).GetShipmentDetails(ctx, req.(*GetShipmentDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShopifyService_CreateShipment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateShipmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopifyServiceServer).CreateShipment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShopifyService_CreateShipment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopifyServiceServer).CreateShipment(ctx, req.(*CreateShipmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ShopifyService_ShipmentGraphql_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShipmentGraphqlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ShopifyServiceServer).ShipmentGraphql(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ShopifyService_ShipmentGraphql_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ShopifyServiceServer).ShipmentGraphql(ctx, req.(*ShipmentGraphqlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ShopifyService_ServiceDesc is the grpc.ServiceDesc for ShopifyService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +364,22 @@ var ShopifyService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOrder",
 			Handler:    _ShopifyService_UpdateOrder_Handler,
+		},
+		{
+			MethodName: "CalculateShippingRates",
+			Handler:    _ShopifyService_CalculateShippingRates_Handler,
+		},
+		{
+			MethodName: "GetShipmentDetails",
+			Handler:    _ShopifyService_GetShipmentDetails_Handler,
+		},
+		{
+			MethodName: "CreateShipment",
+			Handler:    _ShopifyService_CreateShipment_Handler,
+		},
+		{
+			MethodName: "ShipmentGraphql",
+			Handler:    _ShopifyService_ShipmentGraphql_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

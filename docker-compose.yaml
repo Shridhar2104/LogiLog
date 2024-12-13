@@ -12,18 +12,23 @@ services:
       - shopify_postgres_data:/var/lib/postgresql/data
     networks:
       - logilo-network
+    env_file:
+      - .env.development 
     restart: always
 
   shopify-service:
     build:
       context: .  # Path to your service's Go code
       dockerfile: ./shopify/app.dockerfile
+    
     depends_on:
       - shopify-db  # Ensure the DB is up before starting the service
     networks:
       - logilo-network
     ports:
       - "8080:8080"  # Adjust if your service runs on different ports
+    env_file:
+      - .env.development 
 
   graphql-service:
     build:
@@ -36,6 +41,8 @@ services:
       - logilo-network
     ports:
       - "8084:8084"  # Adjust if your service runs on different ports
+    env_file:
+      - .env.development 
     restart: on-failure
     depends_on:
       - shopify-service
@@ -54,6 +61,8 @@ services:
       - account_postgres_data:/var/lib/postgresql/data
     networks:
       - logilo-network
+    env_file:
+      - .env.development 
     restart: always
 
   account-service:
@@ -66,6 +75,8 @@ services:
       - logilo-network
     ports:
       - "8081:8081"  # Adjust if your service runs on different ports
+    env_file:
+      - .env.development 
 
 
 volumes:

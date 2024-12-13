@@ -9,6 +9,9 @@ RUN go mod download
 # Copy the entire project into the container
 COPY . ./ 
 
+# RUN apk add --no-cache protobuf
+# RUN protoc --go_out=. --go-grpc_out=. ./account/account.proto
+
 # Build the Go app from the correct location
 RUN GO111MODULE=on go build -o /app/account/account ./account/cmd/account
 

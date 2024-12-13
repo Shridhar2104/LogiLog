@@ -1,0 +1,70 @@
+name: CI Pipeline - Staging
+
+on:
+  push:
+    branches:
+      - 'staging'
+
+jobs:
+  deploy:
+    name: Build & Push Image to Docker Hub (Staging)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: staging
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push API
+        id: build-push-api
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./graphql/app.dockerfile
+          push: true
+          tags: logilog/graphql:staging
+
+      - name: Build and Push Account-DB
+        id: build-push-account-db
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./account/db.dockerfile
+          push: true
+          tags: logilog/account-db:staging
+
+      - name: Build and Push Account-Service
+        id: build-push-account-service
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./account/app.dockerfile
+          push: true
+          tags: logilog/account-service:staging
+
+      - name: Build and Push Shopify-DB
+        id: build-push-shopify-db
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./shopify/db.dockerfile
+          push: true
+          tags: logilog/shopify-db:staging
+
+      - name: Build and Push Shopify-Service
+        id: build-push-shopify-service
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./shopify/app.dockerfile
+          push: true
+          tags: logilog/shopify-service:staging
