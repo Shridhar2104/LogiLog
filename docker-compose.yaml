@@ -35,8 +35,8 @@ services:
       context: .  # Path to your service's Go code
       dockerfile: ./graphql/app.dockerfile
     environment:
-      - ACCOUNT_URL=localhost:8081
-      - SHOPFY_URL=localhost:8080
+      - ACCOUNT_URL=account-service:8081
+      - SHOPFY_URL=shopify-service:8080
     networks:
       - logilo-network
     ports:

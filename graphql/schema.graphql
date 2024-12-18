@@ -4,8 +4,13 @@ type Account {
 	id: String!
 	name: String!
     password: String!
-    shopName: String!
+    email: String!
     orders: [Order!]!
+    shopnames:[ShopName!]!
+}
+
+type ShopName {
+    shopname: String!
 }
 
 type OrderLineItem {
@@ -32,9 +37,9 @@ input PaginationInput {
 
 
 input AccountInput {
-    name: String!
-    password: String!
-    shopName: String!
+  name: String!
+  password: String!
+  email: String!
 }
 
 input OrderLineItemInput {
@@ -53,6 +58,7 @@ type Mutation {
 }
 
 type Query {
+    getAccountByID(email: String!, password: String!): Account!
     accounts(pagination: PaginationInput!): [Account!]!
 } 
 

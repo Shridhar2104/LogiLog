@@ -8,25 +8,26 @@ message Account {
 	string name = 2;
 	string password = 3;
 	string email = 4;
-	string shopName = 5;
+	// string shopName = 5;
 }
 
 message CreateAccountRequest {
 	string name = 1;
-	string password = 2;
 	string email = 3;
-	string shopName = 4;
+	string password = 2;
+	// string shopName = 4;
 }
 
 message CreateAccountResponse {
 	Account account = 1;
 }   
 
-message GetAccountByIDRequest {
-	string id = 1;
+message GetAccountByEmailAndPasswordRequest {
+	string email = 1;
+	string password=2;
 }
 
-message GetAccountByIDResponse {
+message GetAccountByEmailAndPasswordResponse {
 	Account account = 1;
 }
 
@@ -41,6 +42,6 @@ message ListAccountsResponse {
 
 service AccountService {
 	rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
-	rpc GetAccountByID(GetAccountByIDRequest) returns (GetAccountByIDResponse) {}
+	rpc GetAccountByEmailAndPassword(GetAccountByEmailAndPasswordRequest) returns (GetAccountByEmailAndPasswordResponse) {}
 	rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {}
 }

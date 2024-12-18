@@ -6,8 +6,13 @@ type Account struct {
 	ID string `json:"id"`
 	Name string `json:"name"`
 	Password string `json:"password"`
-	ShopName string `json:"shopName"`
+	Email string `json:"email"`
 	Orders []Order `json:"orders"`
+	ShopNames []ShopName `json:"shopnames"`
+}
+
+type ShopName struct {
+	Shopname string `json:"shopname"`
 }
 
 type Order struct {

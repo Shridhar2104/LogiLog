@@ -1,9 +1,0 @@
-schema:
-  - schema.graphql  # Your schema file containing types, queries, mutations, etc.
-
-models:
-  Account:
-    model: github.com/Shridhar2104/logilo/graphql/models.Account
-    fields:
-      orders:
-        resolver: true  # Custom resolver for the 'orders' field

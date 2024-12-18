@@ -5,7 +5,7 @@ package main
 type AccountInput struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
-	ShopName string `json:"shopName"`
+	Email    string `json:"email"`
 }
 
 type Accounts struct {
@@ -47,4 +47,8 @@ type PaginationInput struct {
 }
 
 type Query struct {
+}
+
+type ShopName struct {
+	Shopname string `json:"shopname"`
 }
